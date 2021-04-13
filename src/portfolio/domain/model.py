@@ -16,7 +16,7 @@ class Asset(object):
 
     @purchase_price.validator
     def check_price(self, attribute, price):
-        if price <= 0 :
+        if price <= 0:
             raise ValueError("Invalid price: Price must be greater than 0")
         return price
     
