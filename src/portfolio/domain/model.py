@@ -7,7 +7,7 @@ from src.portfolio.domain.constants import AssetType, AssetCurrency
 @attr.s
 class Asset(object):
     id: uuid.UUID = attr.ib()
-    ticker: Optional[str] = attr.ib()
+    ticker: str = attr.ib()
     name: str = attr.ib()
     qty: int = attr.ib()
     purchase_price: float = attr.ib()
