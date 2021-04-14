@@ -1,9 +1,7 @@
 import attr
 import uuid
-from typing import List, Optional
+from typing import List
 from src.portfolio.domain.constants import AssetType, AssetCurrency
-
-
 
 
 @attr.s
@@ -28,9 +26,12 @@ class Asset(object):
 
     @qty.validator
     def check_quantity(self, attribute, quantity):
-        if quantity <= 0 :
-            raise ValueError("Invalid Quantity: Asset quantity must be greater than 0")
+        if quantity <= 0:
+            raise ValueError(
+                "Invalid Quantity: Asset quantity must be greater than 0"
+            )
         return quantity
+
 
 @attr.s
 class Portfolio(object):
