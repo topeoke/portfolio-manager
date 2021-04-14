@@ -1,13 +1,13 @@
 import attr
 import uuid
-from typing import List
-from portfolio.domain.constants import AssetType, AssetCurrency
+from typing import List, Optional
+from src.portfolio.domain.constants import AssetType, AssetCurrency
 
 
 @attr.s
 class Asset(object):
     id: uuid.UUID = attr.ib()
-    ticker: str = attr.ib()
+    ticker: Optional[str] = attr.ib()
     name: str = attr.ib()
     qty: int = attr.ib()
     purchase_price: float = attr.ib()
@@ -29,5 +29,5 @@ class Asset(object):
 @attr.s
 class Portfolio(object):
     id: uuid.UUID = attr.ib()
-    holdings: List[Asset] = attr.ib(factory=list)
+    #holdings: List[Asset] = attr.ib(factory=list)
     version: int = attr.ib()
