@@ -4,6 +4,8 @@ from typing import List, Optional
 from src.portfolio.domain.constants import AssetType, AssetCurrency
 
 
+
+
 @attr.s
 class Asset(object):
     id: uuid.UUID = attr.ib()
@@ -23,7 +25,7 @@ class Asset(object):
         if price <= 0:
             raise ValueError("Invalid price: Price must be greater than 0")
         return price
-    
+
     @qty.validator
     def check_quantity(self, attribute, quantity):
         if quantity <= 0 :
