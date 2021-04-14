@@ -13,6 +13,10 @@ class Asset(object):
     purchase_price: float = attr.ib()
     purchase_currency: AssetCurrency = attr.ib()
     asset_type: AssetType = attr.ib()
+    asset_value: float = attr.ib(init=False)
+
+    def __attrs_post_init__(self):
+        self.asset_value = self.qty * self.purchase_price
 
     @purchase_price.validator
     def check_price(self, attribute, price):
@@ -30,4 +34,8 @@ class Asset(object):
 class Portfolio(object):
     id: uuid.UUID = attr.ib()
     version: int = attr.ib()
+    portfolio_value: float = attr.ib(init=False)
     holdings: List[Asset] = attr.ib(factory=list)
+
+    def __attrs_post_init__(self):
+        self.portfolio_value = sum([i.asset_value for i in self.holdings])
