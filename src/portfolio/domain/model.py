@@ -29,5 +29,5 @@ class Asset(object):
 @attr.s
 class Portfolio(object):
     id: uuid.UUID = attr.ib()
-    #holdings: List[Asset] = attr.ib(factory=list)
     version: int = attr.ib()
+    holdings: List[Asset] = attr.ib(factory=list)
