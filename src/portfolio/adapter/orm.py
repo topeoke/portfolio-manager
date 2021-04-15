@@ -7,11 +7,14 @@ from sqlalchemy import (
     ForeignKey,
     Float,
     Enum,
+    DateTime,
 )
+from datetime import datetime
 from sqlalchemy.orm import mapper, relationship
 from sqlalchemy_utils import UUIDType
 from src.portfolio.domain.constants import AssetCurrency, AssetType
 from src.portfolio.domain import model
+
 
 metadata = MetaData()
 
@@ -26,6 +29,10 @@ assets = Table(
     Column("purchase_currency", Enum(AssetCurrency)),
     Column("asset_type", Enum(AssetType)),
     Column("asset_value", Float),
+    Column("created_on", DateTime, default=datetime.now),
+    Column(
+        "updated_on", DateTime, default=datetime.now, onupdate=datetime.now
+    ),
     Column("portfolio_id", ForeignKey("portfolio.id")),
 )
 
@@ -34,6 +41,10 @@ portfolio = Table(
     metadata,
     Column("id", UUIDType(binary=False), primary_key=True),
     Column("portfolio_value", Float),
+    Column("created_on", DateTime, default=datetime.now),
+    Column(
+        "updated_on", DateTime, default=datetime.now, onupdate=datetime.now
+    ),
     Column("version", Integer, nullable=False),
 )
 

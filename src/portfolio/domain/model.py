@@ -42,3 +42,15 @@ class Portfolio(object):
 
     def __attrs_post_init__(self):
         self.portfolio_value = sum([i.asset_value for i in self.holdings])
+
+    """
+    @holdings.validator
+    def check_holdings(self, attribute, asset_holdings):
+        _holdings = list()
+        for i in len(asset_holdings):
+            for j in len(asset_holdings) - 1:
+                if asset_holdings[j].ticker == asset_holdings[i].ticker:
+                    _temp_asset = asset_holdings[i]
+                    _temp_asset.qty = asset_holdings[j] + asset_holdings[i]
+                    _holdings.append(_temp_asset)
+    """
