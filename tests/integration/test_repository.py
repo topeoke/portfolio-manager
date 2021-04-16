@@ -11,7 +11,6 @@ def test_portfolio_add(session):
     assert isinstance(portfolio_.id, uuid.UUID)
     repo = SqlAlchemyRepository(session)
     repo.add(portfolio_)
-    repo.commit
     result = repo.get_by_id(portfolio_.id)
     assert isinstance(result.version, int)
     assert isinstance(result.id, uuid.UUID)

@@ -30,9 +30,6 @@ class SqlAlchemyRepository(AbstractRepository):
     def get_by_id(self, id) -> model.Portfolio:
         return self.session.query(model.Portfolio).filter_by(id=id).first()
 
-    def commit(self):
-        self.session.commit()
-
 
 class SessionFactory:
     """ session factory for database session"""
