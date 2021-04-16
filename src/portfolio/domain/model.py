@@ -4,7 +4,7 @@ from typing import List
 from src.portfolio.domain.constants import AssetType, AssetCurrency
 
 
-@attr.s(auto_attribs=True)
+@attr.s(auto_attribs=True, hash=True)
 class Asset(object):
     id: uuid.UUID = attr.ib()
     ticker: str = attr.ib()
@@ -38,7 +38,7 @@ class Portfolio(object):
     id: uuid.UUID = attr.ib()
     version: int = attr.ib()
     portfolio_value: float = attr.ib(init=False)
-    holdings: List[Asset] = attr.ib(factory=list, hash=True)
+    holdings: List[Asset] = attr.ib(factory=list)
 
     def __attrs_post_init__(self):
         self.portfolio_value = sum([i.asset_value for i in self.holdings])

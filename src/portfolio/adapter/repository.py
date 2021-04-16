@@ -21,8 +21,8 @@ class SqlAlchemyRepository(AbstractRepository):
     def __init__(self, session):
         self.session = session
 
-    def add(self, porfolio: model.Portfolio):
-        self.session.add(porfolio)
+    def add(self, portfolio: model.Portfolio):
+        self.session.add(portfolio)
 
     def get(self) -> List[model.Portfolio]:
         return self.session.query(model.Portfolio).all()
@@ -43,9 +43,7 @@ class SessionFactory:
         self.engine = create_engine(
             self.database_url, connect_args=self.connection_args
         )
-        self.session_factory = sessionmaker(
-            bind=self.engine, autocommit=False, autoflush=False
-        )
+        self.session_factory = sessionmaker(bind=self.engine)
         metadata.create_all(self.engine)
 
     def __call__(self, **kwargs):
