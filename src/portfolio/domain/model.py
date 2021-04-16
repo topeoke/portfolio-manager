@@ -4,7 +4,7 @@ from typing import List
 from src.portfolio.domain.constants import AssetType, AssetCurrency
 
 
-@attr.s
+@attr.s(auto_attribs=True)
 class Asset(object):
     id: uuid.UUID = attr.ib()
     ticker: str = attr.ib()
@@ -33,24 +33,12 @@ class Asset(object):
         return quantity
 
 
-@attr.s
+@attr.s(auto_attribs=True)
 class Portfolio(object):
     id: uuid.UUID = attr.ib()
     version: int = attr.ib()
     portfolio_value: float = attr.ib(init=False)
-    holdings: List[Asset] = attr.ib(factory=list)
+    holdings: List[Asset] = attr.ib(factory=list, hash=True)
 
     def __attrs_post_init__(self):
         self.portfolio_value = sum([i.asset_value for i in self.holdings])
-
-    """
-    @holdings.validator
-    def check_holdings(self, attribute, asset_holdings):
-        _holdings = list()
-        for i in len(asset_holdings):
-            for j in len(asset_holdings) - 1:
-                if asset_holdings[j].ticker == asset_holdings[i].ticker:
-                    _temp_asset = asset_holdings[i]
-                    _temp_asset.qty = asset_holdings[j] + asset_holdings[i]
-                    _holdings.append(_temp_asset)
-    """

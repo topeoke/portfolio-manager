@@ -18,8 +18,8 @@ from src.portfolio.domain import model
 
 metadata = MetaData()
 
-assets = Table(
-    "assets",
+asset = Table(
+    "asset",
     metadata,
     Column("id", UUIDType(binary=False), primary_key=True),
     Column("name", String),
@@ -33,7 +33,7 @@ assets = Table(
     Column(
         "updated_on", DateTime, default=datetime.now, onupdate=datetime.now
     ),
-    Column("portfolio_id", ForeignKey("portfolio.id")),
+    Column("portfolio_id", UUIDType(binary=False), ForeignKey("portfolio.id")),
 )
 
 portfolio = Table(
@@ -50,7 +50,7 @@ portfolio = Table(
 
 
 def start_mappers():
-    asset_mapper = mapper(model.Asset, assets)
+    asset_mapper = mapper(model.Asset, asset)
     mapper(
         model.Portfolio,
         portfolio,
