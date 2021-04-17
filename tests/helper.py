@@ -12,7 +12,9 @@ def Asset_Generator() -> model.Asset:
     test_qty = (
         int("".join(random.choice(string.digits) for i in range(3))) + 10
     )
-    test_price = float("".join(random.choice(string.digits) for i in range(3)))
+    test_price = (
+        float("".join(random.choice(string.digits) for i in range(3))) + 10
+    )
 
     return model.Asset(
         id=uuid.uuid4(),
