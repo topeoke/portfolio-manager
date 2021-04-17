@@ -33,12 +33,12 @@ class Asset(object):
         return quantity
 
 
-@attr.s(auto_attribs=True)
+@attr.s(auto_attribs=True, hash=True)
 class Portfolio(object):
     id: uuid.UUID = attr.ib()
     version: int = attr.ib()
     portfolio_value: float = attr.ib(init=False)
-    holdings: List[Asset] = attr.ib(factory=list)
+    holdings: List[Asset] = attr.ib(factory=list, hash=True)
 
     def __attrs_post_init__(self):
         self.portfolio_value = sum([i.asset_value for i in self.holdings])

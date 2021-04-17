@@ -12,6 +12,7 @@ def test_portfolio_add(session):
     repo = SqlAlchemyRepository(session)
     repo.add(portfolio_)
     result = repo.get_by_id(portfolio_.id)
+    repo.close()
     assert isinstance(result.version, int)
     assert isinstance(result.id, uuid.UUID)
     assert isinstance(result.holdings[0], model.Asset)

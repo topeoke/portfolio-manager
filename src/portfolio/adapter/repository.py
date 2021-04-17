@@ -16,6 +16,9 @@ class AbstractRepository(ABC):
     def get(self, id: str) -> model.Portfolio:
         raise NotImplementedError
 
+    def close(self):
+        self.session.close()
+
 
 class SqlAlchemyRepository(AbstractRepository):
     def __init__(self, session):
